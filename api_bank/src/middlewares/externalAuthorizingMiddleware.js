@@ -1,5 +1,5 @@
-const externalAuthorizingService = require('../services/externalAuthorizingService');
-exports.Authorization = async(req,res,next)=>{
+const externalAuthorizingService = require('../api/services/externalAuthorizingService');
+exports.authorization = async(req,res,next)=>{
     try {
         const response = await externalAuthorizingService.getAuthorization();
         if(response === true){

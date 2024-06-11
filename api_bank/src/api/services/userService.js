@@ -19,7 +19,7 @@ const createToken = (user) => {
 };
 
 exports.register = async (userData) => {
-    const {name, document, email, password, type } = userData;
+    const { name, document, email, password, type } = userData;
 
     if (!name) throw new Error("Name invalid");
     if (!password) throw new Error("Password invalid");
@@ -39,6 +39,7 @@ exports.register = async (userData) => {
     });
 
     const token = createToken(user);
+    user.password = undefined;
     return { user, token };
 };
 

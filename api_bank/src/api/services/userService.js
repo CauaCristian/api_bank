@@ -27,13 +27,11 @@ exports.register = async (userData) => {
     if (!validation.validateDocument(document)) throw new Error("Document invalid");
     if (!validation.validateEmail(email)) throw new Error("Email invalid");
 
-    const hashedPassword = await bcrypt.hash(password, 10);
-
     const user = await userModel.create({
         name,
         document,
         email,
-        password: hashedPassword,
+        password,
         type,
         balance: 0.00
     });

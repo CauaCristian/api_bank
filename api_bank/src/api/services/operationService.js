@@ -1,11 +1,13 @@
 const transactionModel = require('../models/transactionModel');
 const userModel = require('../models/userModel');
 
-exports.makeTransfer = async (transferData) => {
+exports.makeTransfer = async (transferData,userLogged) => {
     if (!transferData) throw new Error('transfer invalid');
+    
     const { value, payerId, payeeId } = transferData;
+    if(parseInt(userLogged.id) !== parseInt(payerId)) throw new Error('the logged in user is not the payer');
     if (!value) throw new Error('value invalid');
-    if (value <0) throw new Error('value is negative');
+    if (value < 0) throw new Error('value is negative');
     if (!payerId) throw new Error('payerId invalid');
     if (!payeeId) throw new Error('payeeId invalid');
     if(payeeId === payerId) throw new Error('It is not possible to transfer to yourself')
